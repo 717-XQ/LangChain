@@ -49,6 +49,21 @@
 
       <!-- 中间聊天区 -->
       <main class="chat-area">
+        <!-- 工具条：右上角"工具调用"开关按钮（点击展开/收回右侧统计面板） -->
+        <div class="chat-toolbar">
+          <span class="toolbar-mode">{{ agentTypeLabel }}</span>
+          <el-button
+            :type="showStats ? 'primary' : 'default'"
+            size="small"
+            class="stats-toggle"
+            @click="toggleStats"
+          >
+            <el-icon><Histogram /></el-icon>
+            工具调用
+            <el-badge :value="agentStore.allToolCalls.length" :hidden="agentStore.allToolCalls.length === 0" />
+          </el-button>
+        </div>
+
         <el-scrollbar ref="scrollRef" class="message-list">
           <div v-if="agentStore.messages.length === 0" class="welcome">
             <el-icon class="welcome-icon"><Cpu /></el-icon>
@@ -69,9 +84,6 @@
             :message="msg"
           />
         </el-scrollbar>
-
-        <!-- 工具统计图表（技术栈2.2：ECharts） -->
-        <ToolStatsChart :tool-calls="agentStore.allToolCalls" />
 
         <!-- 输入区 -->
         <div class="input-area">
@@ -110,6 +122,29 @@
           </div>
         </div>
       </main>
+
+      <!-- 右侧工具调用统计面板（点击"工具调用"按钮展开/收回，不遮挡会话内容） -->
+      <aside class="stats-panel" :class="{ open: showStats }">
+        <div class="stats-inner">
+          <div class="stats-header">
+            <span class="stats-title">
+              <el-icon><DataAnalysis /></el-icon>
+              工具调用统计
+            </span>
+            <el-button size="small" text :icon="Close" @click="showStats = false" />
+          </div>
+          <ToolStatsChart :tool-calls="agentStore.allToolCalls" />
+          <div class="stats-detail">
+            <div class="detail-title">调用明细</div>
+            <el-table :data="toolStats" size="small" :show-header="false">
+              <el-table-column prop="name" label="工具" />
+              <el-table-column prop="count" label="次数" width="56" align="center" />
+              <el-table-column prop="avgTime" label="平均耗时" width="86" align="right" />
+            </el-table>
+            <div v-if="toolStats.length === 0" class="detail-empty">暂无工具调用</div>
+          </div>
+        </div>
+      </aside>
     </div>
 
     <!-- 高风险操作审批弹窗 -->
@@ -125,9 +160,13 @@
 import { ref, computed, onMounted, nextTick, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { MagicStick, Cpu, Promotion, SwitchButton, Connection, InfoFilled, ArrowDown } from '@element-plus/icons-vue'
+import {
+  MagicStick, Cpu, Promotion, SwitchButton, Connection, InfoFilled,
+  ArrowDown, Histogram, DataAnalysis, Close
+} from '@element-plus/icons-vue'
 import { useAgentStore } from '@/stores/agent'
 import { useAuthStore } from '@/stores/auth'
+import type { ToolCall } from '@/types'
 import ChatMessage from '@/components/ChatMessage.vue'
 import SessionSidebar from '@/components/SessionSidebar.vue'
 import ApprovalDialog from '@/components/ApprovalDialog.vue'
@@ -138,6 +177,8 @@ const agentStore = useAgentStore()
 const authStore = useAuthStore()
 const inputText = ref('')
 const scrollRef = ref()
+// 右侧工具调用统计面板：默认收起，点击"工具调用"按钮展开/收回
+const showStats = ref(false)
 
 const exampleQuestions = [
   '帮我查询技术部有多少名员工',
@@ -159,6 +200,26 @@ const agentTypeLabel = computed(() => {
   }
   return map[agentStore.agentType] || agentStore.agentType
 })
+
+// 按工具聚合统计（名称/次数/平均耗时）
+const toolStats = computed(() => {
+  const map = new Map<string, { count: number; total: number }>()
+  for (const tc of agentStore.allToolCalls) {
+    const item = map.get(tc.toolName) || { count: 0, total: 0 }
+    item.count += 1
+    if (tc.duration) item.total += tc.duration
+    map.set(tc.toolName, item)
+  }
+  return Array.from(map.entries()).map(([name, v]) => ({
+    name,
+    count: v.count,
+    avgTime: v.count ? `${(v.total / v.count).toFixed(2)}s` : '-'
+  }))
+})
+
+function toggleStats() {
+  showStats.value = !showStats.value
+}
 
 async function scrollToBottom() {
   await nextTick()
@@ -315,10 +376,34 @@ onUnmounted(() => {
 
 .chat-area {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: #fff;
+}
+
+/* 聊天区顶部工具条 */
+.chat-toolbar {
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #f0f0f5;
+  background: #fafbfc;
+}
+
+.toolbar-mode {
+  font-size: 12px;
+  color: #909399;
+}
+
+.stats-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .message-list {
@@ -365,6 +450,67 @@ onUnmounted(() => {
 
 .example-btn {
   margin: 0;
+}
+
+/* 右侧工具调用统计面板（收起时 width=0，展开时 320px，带过渡动画） */
+.stats-panel {
+  width: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: width 0.25s ease;
+  background: #fafbfc;
+  border-left: 1px solid #ebeef5;
+}
+
+.stats-panel.open {
+  width: 320px;
+}
+
+.stats-inner {
+  width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.stats-header {
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f0f5;
+}
+
+.stats-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.stats-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 12px;
+}
+
+.detail-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #606266;
+  margin: 8px 0 6px;
+}
+
+.detail-empty {
+  font-size: 12px;
+  color: #c0c4cc;
+  text-align: center;
+  padding: 24px 0;
 }
 
 .input-area {
