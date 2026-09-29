@@ -216,6 +216,8 @@ class AppConfig(BaseSettings):
             self.tools.search.serpapi_key = os.environ["SERPAPI_KEY"]
         if os.environ.get("JWT_SECRET"):
             self.auth.jwt_secret = os.environ["JWT_SECRET"]
+        if os.environ.get("DATABASE_URL"):
+            self.database.url = os.environ["DATABASE_URL"]
 
     # ---- 序列化 ----
     def to_dict(self) -> Dict[str, Any]:

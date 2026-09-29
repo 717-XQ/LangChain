@@ -71,7 +71,8 @@ server:
 
 database:
   # 用户/认证数据存储（技术栈2.1：SQLAlchemy，开发SQLite / 生产MySQL/PG）
-  # 示例MySQL: "mysql+pymysql://root:password@127.0.0.1:3306/agent_kb?charset=utf8mb4"
+  # 本地/生产连接串建议通过环境变量 DATABASE_URL 注入（.env，不入库）：
+  #   DATABASE_URL=mysql+pymysql://root:password@127.0.0.1:3306/agent_kb?charset=utf8mb4
   url: "sqlite:///data/app.db"
 
 auth:
