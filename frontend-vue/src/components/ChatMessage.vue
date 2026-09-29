@@ -30,37 +30,19 @@
         <MarkdownContent v-else-if="message.role === 'assistant'" :content="message.content" class="answer-text"
           :class="{ 'streaming-cursor': message.streaming }" />
         <p v-else class="answer-text">{{ message.content }}</p>
-
-        <!-- 工具调用时间线 -->
-        <div v-if="message.toolCalls && message.toolCalls.length > 0" class="tools-section">
-          <el-collapse v-model="activeTools">
-            <el-collapse-item title="工具调用记录" :name="message.id">
-              <template #title>
-                <div class="tools-title">
-                  <el-icon><Tools /></el-icon>
-                  <span>工具调用 ({{ message.toolCalls.length }})</span>
-                </div>
-              </template>
-              <ToolTimeline :tool-calls="message.toolCalls" />
-            </el-collapse-item>
-          </el-collapse>
-        </div>
+        <!-- 工具调用详情已移入右侧"工具调用"面板，不再内嵌，避免拉长会话 -->
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { ChatMessage } from '@/types'
-import ToolTimeline from './ToolTimeline.vue'
 import MarkdownContent from './MarkdownContent.vue'
 
-const props = defineProps<{
+defineProps<{
   message: ChatMessage
 }>()
-
-const activeTools = ref<string[]>([props.message.id])
 </script>
 
 <style scoped>
@@ -154,20 +136,5 @@ const activeTools = ref<string[]>([props.message.id])
   color: #303133;
   white-space: pre-wrap;
   word-break: break-word;
-}
-
-.tools-section {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #ebeef5;
-}
-
-.tools-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #606266;
 }
 </style>

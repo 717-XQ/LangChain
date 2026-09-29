@@ -123,25 +123,22 @@
         </div>
       </main>
 
-      <!-- 右侧工具调用统计面板（点击"工具调用"按钮展开/收回，不遮挡会话内容） -->
+      <!-- 右侧工具调用面板（点击"工具调用"按钮展开/收回，不遮挡会话内容） -->
       <aside class="stats-panel" :class="{ open: showStats }">
         <div class="stats-inner">
           <div class="stats-header">
             <span class="stats-title">
               <el-icon><DataAnalysis /></el-icon>
-              工具调用统计
+              工具调用
             </span>
             <el-button size="small" text :icon="Close" @click="showStats = false" />
           </div>
-          <ToolStatsChart :tool-calls="agentStore.allToolCalls" />
-          <div class="stats-detail">
-            <div class="detail-title">调用明细</div>
-            <el-table :data="toolStats" size="small" :show-header="false">
-              <el-table-column prop="name" label="工具" />
-              <el-table-column prop="count" label="次数" width="56" align="center" />
-              <el-table-column prop="avgTime" label="平均耗时" width="86" align="right" />
-            </el-table>
-            <div v-if="toolStats.length === 0" class="detail-empty">暂无工具调用</div>
+          <div class="stats-chart">
+            <ToolStatsChart :tool-calls="agentStore.allToolCalls" />
+          </div>
+          <div class="stats-timeline">
+            <div class="detail-title">调用过程</div>
+            <ToolTimeline :tool-calls="agentStore.allToolCalls" />
           </div>
         </div>
       </aside>
@@ -166,11 +163,11 @@ import {
 } from '@element-plus/icons-vue'
 import { useAgentStore } from '@/stores/agent'
 import { useAuthStore } from '@/stores/auth'
-import type { ToolCall } from '@/types'
 import ChatMessage from '@/components/ChatMessage.vue'
 import SessionSidebar from '@/components/SessionSidebar.vue'
 import ApprovalDialog from '@/components/ApprovalDialog.vue'
 import ToolStatsChart from '@/components/ToolStatsChart.vue'
+import ToolTimeline from '@/components/ToolTimeline.vue'
 
 const router = useRouter()
 const agentStore = useAgentStore()
@@ -493,7 +490,13 @@ onUnmounted(() => {
   color: #303133;
 }
 
-.stats-detail {
+/* 图表区（固定高度，顶部展示） */
+.stats-chart {
+  flex-shrink: 0;
+}
+
+/* 调用过程时间线（占剩余空间，可滚动） */
+.stats-timeline {
   flex: 1;
   overflow-y: auto;
   padding-bottom: 12px;
@@ -503,14 +506,7 @@ onUnmounted(() => {
   font-size: 12px;
   font-weight: 600;
   color: #606266;
-  margin: 8px 0 6px;
-}
-
-.detail-empty {
-  font-size: 12px;
-  color: #c0c4cc;
-  text-align: center;
-  padding: 24px 0;
+  margin: 6px 0 2px;
 }
 
 .input-area {
