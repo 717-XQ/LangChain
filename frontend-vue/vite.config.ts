@@ -13,11 +13,12 @@ export default defineConfig({
     port: 5174,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        // 用 127.0.0.1 而非 localhost：避免 Node 解析为 IPv6 ::1 导致 ECONNREFUSED（后端监听 IPv4 0.0.0.0）
+        target: 'http://127.0.0.1:8000',
         changeOrigin: true
       },
       '/ws': {
-        target: 'http://localhost:8000',
+        target: 'ws://127.0.0.1:8000',
         ws: true,
         changeOrigin: true
       }

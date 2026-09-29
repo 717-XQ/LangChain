@@ -160,7 +160,7 @@ export class AgentWebSocket {
     // 开发环境直接连接后端WebSocket（携带JWT Token），生产环境通过Nginx反向代理
     const token = tokenStorage.getAccess() || ''
     const wsUrl = import.meta.env.DEV
-      ? `ws://localhost:8000/ws?token=${encodeURIComponent(token)}`
+      ? `ws://127.0.0.1:8000/ws?token=${encodeURIComponent(token)}`
       : `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws?token=${encodeURIComponent(token)}`
     console.log('[WebSocket] 连接到:', wsUrl)
     this.ws = new WebSocket(wsUrl)
