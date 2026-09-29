@@ -14,14 +14,17 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./data:/app/data
-      - ./faiss_memory:/app/faiss_memory
-      - ./faiss_docs:/app/faiss_docs
-      - ./docs:/app/docs
-      - ./config.yaml:/app/config.yaml
+      - ./backend/data:/app/backend/data
+      - ./backend/faiss_memory:/app/backend/faiss_memory
+      - ./backend/faiss_docs:/app/backend/faiss_docs
+      - ./backend/docs:/app/backend/docs
+      - ./backend/config.yaml:/app/backend/config.yaml
     environment:
       - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - SERPAPI_KEY=${SERPAPI_KEY}
+      - JWT_SECRET=${JWT_SECRET}
       - HF_ENDPOINT=https://hf-mirror.com
     restart: unless-stopped
     deploy:
@@ -39,11 +42,13 @@ services:
     ports:
       - "7860:7860"
     volumes:
-      - ./data:/app/data
-      - ./faiss_memory:/app/faiss_memory
-      - ./config.yaml:/app/config.yaml
+      - ./backend/data:/app/backend/data
+      - ./backend/faiss_memory:/app/backend/faiss_memory
+      - ./backend/config.yaml:/app/backend/config.yaml
     environment:
       - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
+      - JWT_SECRET=${JWT_SECRET}
       - HF_ENDPOINT=https://hf-mirror.com
     depends_on:
       - agent-api
