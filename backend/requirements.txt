@@ -1,0 +1,55 @@
+# ============================================================
+# AI Agent助手 - 依赖清单
+# ============================================================
+# 与RAG/LoRA项目共用虚拟环境，已安装的包标注[已装]
+# 安装命令: pip install -r requirements.txt
+# ============================================================
+
+# ---- LangChain核心 [RAG项目已装langchain/langchain-community] ----
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-community>=0.3.0
+langchain-openai>=0.2.0          # OpenAI兼容接口（用于DeepSeek）
+langgraph>=0.2.0                # 【需安装】有状态图编排
+
+# ---- 向量存储与Embedding ----
+faiss-cpu>=1.8.0                # 【需安装】FAISS向量库（CPU版，轻量）
+sentence-transformers>=3.0.0    # [已装] BGE Embedding
+
+# ---- 工具依赖 ----
+duckduckgo-search>=6.0.0        # 【需安装】免费联网搜索（无需API Key）
+# serpapi                       # 可选：SerpAPI搜索（需API Key，pip install google-search-results）
+sqlalchemy>=2.0.0               # [已装] SQL数据库查询
+
+# ---- 服务端 ----
+fastapi>=0.110.0                # [已装] REST API
+uvicorn>=0.29.0                 # [已装] ASGI服务器
+python-multipart>=0.0.9         # [已装] 表单处理
+websockets>=12.0                # [已装] WebSocket支持
+pydantic>=2.0.0                 # [已装] 数据验证
+
+# ---- 配置管理（技术栈2.1：pydantic-settings）----
+pydantic-settings>=2.6.0        # [已装] 配置管理（YAML + 环境变量）
+
+# ---- 认证（技术栈2.1：JWT）----
+python-jose>=3.3.0              # [已装] JWT令牌
+bcrypt>=4.0.0                   # [已装] 密码哈希
+
+# ---- 前端 ----
+gradio>=4.44.0                  # [需升级] Gradio前端（RAG项目为4.42.0，建议升级）
+
+# ---- 文档处理（RAG工具用）----
+pymupdf>=1.24.0                 # [已装] PDF解析
+python-docx>=1.1.0              # [已装] Word解析
+langchain-text-splitters>=0.3.0 # [已装] 文本分块
+
+# ---- 工具库 ----
+pyyaml>=6.0                     # [已装] YAML配置
+loguru>=0.7.0                   # [已装] 日志
+tqdm>=4.66.0                    # [已装] 进度条
+numpy>=1.26.0                   # [已装] 数值计算
+python-dotenv>=1.0.0            # [已装] 环境变量
+httpx>=0.27.0                   # [已装] HTTP客户端
+
+# ---- 可选：LangSmith追踪 ----
+# langsmith                     # 取消注释并设置LANGSMITH_API_KEY启用

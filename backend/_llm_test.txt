@@ -1,0 +1,11 @@
+﻿python.exe : D:\ronghua_pythoncode\projcet_vue\.venv\lib\site-packages\langgraph\cache\base\__init__.py:8: LangChainPen
+dingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value 
+(e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
+所在位置 行:1 字符: 59
++ ... n\backend"; & "D:\ronghua_pythoncode\projcet_vue\.venv\Scripts\python ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:\ronghua_pyth...s this warning.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+LLM集成 import OK

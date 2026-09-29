@@ -1,0 +1,57 @@
+# ============================================================
+# AI Agent助手 - Docker Compose
+# ============================================================
+# 启动: docker-compose up -d
+# 停止: docker-compose down
+# ============================================================
+
+version: "3.8"
+
+services:
+  agent-api:
+    build: .
+    container_name: ai-agent-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./faiss_memory:/app/faiss_memory
+      - ./faiss_docs:/app/faiss_docs
+      - ./docs:/app/docs
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - SERPAPI_KEY=${SERPAPI_KEY}
+      - HF_ENDPOINT=https://hf-mirror.com
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  agent-web:
+    build: .
+    container_name: ai-agent-web
+    command: python main.py web --host 0.0.0.0 --port 7860
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./data:/app/data
+      - ./faiss_memory:/app/faiss_memory
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - HF_ENDPOINT=https://hf-mirror.com
+    depends_on:
+      - agent-api
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

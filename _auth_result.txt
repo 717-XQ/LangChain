@@ -1,0 +1,30 @@
+﻿python.exe : D:\ronghua_pythoncode\projcet_vue\.venv\lib\site-packages\langgraph\cache\base\__init__.py:8: LangChainPen
+dingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value 
+(e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
+所在位置 行:1 字符: 51
++ ... LangChain"; & "D:\ronghua_pythoncode\projcet_vue\.venv\Scripts\python ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:\ronghua_pyth...s this warning.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+2026-09-29 10:51:44.412 | INFO     | database:init_db:67 - 数据库初始化完成: sqlite:///data/app.db
+2026-09-29 10:51:44.682 | INFO     | server.auth:register:191 - 新用户注册: smoke_user (id=1)
+2026-09-29 10:51:45.166 | INFO     | server.auth:login:210 - 用户登录: smoke_user
+2026-09-29 10:51:45.172 | INFO     | agent_manager:tools:58 - 初始化工具集...
+2026-09-29 10:51:45.219 | INFO     | tools.doc_qa:__init__:52 - 初始化文档QA Embedding模型: BAAI/bge-small-zh-v1.5
+2026-09-29 10:51:53.258 | INFO     | agent_manager:tools:64 - 文档QA工具已加载
+2026-09-29 10:51:53.259 | INFO     | agent_manager:memory:50 - 初始化记忆管理器...
+2026-09-29 10:51:53.259 | INFO     | agent_manager:tools:73 - 已加载 9 个工具: ['Search', 'Weather', 'Calculator', 'PythonExe
+cutor', 'SQLQuery', 'GetDBSchema', 'DocQA', 'RememberFact', 'RecallFact']
+AUTH SMOKE TESTS: 10 PASSED
+  - health 200
+  - 无Token 401
+  - register 201 + 双Token
+  - 重复注册 400
+  - 错误密码 401
+  - 登录 200
+  - 带Token /api/tools 200
+  - /auth/me 200
+  - 刷新Token 200
+  - 刷新后Token有效

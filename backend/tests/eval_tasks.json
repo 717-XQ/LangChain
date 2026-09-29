@@ -1,0 +1,472 @@
+[
+  {
+    "id": 1,
+    "task": "计算 256 * 48 等于多少",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "12288"
+    ],
+    "category": "calculation",
+    "difficulty": "easy",
+    "answer": "12288",
+    "check": "结果为 12288"
+  },
+  {
+    "id": 2,
+    "task": "sqrt(144) + 3**3 的结果是多少",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "39"
+    ],
+    "category": "calculation",
+    "difficulty": "easy",
+    "answer": "39",
+    "check": "12 + 27 = 39"
+  },
+  {
+    "id": 3,
+    "task": "用Python计算1到100中所有质数的和",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "1060"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium",
+    "answer": "1060",
+    "check": "质数 [2,3,5,...,97] 之和为 1060"
+  },
+  {
+    "id": 4,
+    "task": "用Python生成斐波那契数列前20项并打印",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "1",
+      "1",
+      "2",
+      "3",
+      "5",
+      "8"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium",
+    "answer": "1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765",
+    "check": "输出应包含 1,1,2,3,5,8 且共20项"
+  },
+  {
+    "id": 5,
+    "task": "用Python实现一个简单的冒泡排序，对列表[64,34,25,12,22,11,90]排序并输出结果",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "11",
+      "12",
+      "22",
+      "25",
+      "34",
+      "64",
+      "90"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium",
+    "answer": "[11,12,22,25,34,64,90]",
+    "check": "排序后应为升序 [11,12,22,25,34,64,90]"
+  },
+  {
+    "id": 6,
+    "task": "查询数据库中有哪些表",
+    "expected_tools": [
+      "GetDBSchema"
+    ],
+    "expected_keywords": [
+      "employees",
+      "departments",
+      "projects"
+    ],
+    "category": "database",
+    "difficulty": "easy",
+    "answer": "employees, departments, projects",
+    "check": "应返回三张表",
+    "expected_sql": "SHOW TABLES;"
+  },
+  {
+    "id": 7,
+    "task": "查询技术部有多少名员工",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "5"
+    ],
+    "category": "database",
+    "difficulty": "medium",
+    "answer": "5",
+    "check": "技术部员工数 = 5",
+    "expected_sql": "SELECT COUNT(*) FROM employees e JOIN departments d ON e.dept_id = d.id WHERE d.name = '技术部';"
+  },
+  {
+    "id": 8,
+    "task": "查询薪资最高的员工姓名和薪资",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "王强",
+      "45000"
+    ],
+    "category": "database",
+    "difficulty": "medium",
+    "answer": "王强, 45000",
+    "check": "最高薪资员工为王强 45000",
+    "expected_sql": "SELECT name, salary FROM employees ORDER BY salary DESC LIMIT 1;"
+  },
+  {
+    "id": 9,
+    "task": "查询每个部门的平均薪资，按平均薪资降序排列",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "技术部",
+      "产品部",
+      "市场部"
+    ],
+    "category": "database",
+    "difficulty": "hard",
+    "answer": "技术部 > 产品部 > 市场部",
+    "check": "降序返回各部门平均薪资，含技术部/产品部/市场部"
+  },
+  {
+    "id": 10,
+    "task": "查询所有在2022年入职的员工姓名和职位",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "张伟",
+      "冯雪",
+      "褚明",
+      "刘洋"
+    ],
+    "category": "database",
+    "difficulty": "medium",
+    "answer": "张伟, 冯雪, 褚明, 刘洋",
+    "check": "应包含 张伟、冯雪、褚明、刘洋"
+  },
+  {
+    "id": 11,
+    "task": "查询状态为'进行中'的项目名称和预算",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "智能客服",
+      "APP",
+      "Agent"
+    ],
+    "category": "database",
+    "difficulty": "medium",
+    "answer": "智能客服(系统)、APP、Agent 等项目",
+    "check": "应包含 智能客服、APP、Agent 相关项目"
+  },
+  {
+    "id": 12,
+    "task": "搜索一下2026年人工智能领域的最新进展",
+    "expected_tools": [
+      "Search"
+    ],
+    "expected_keywords": [
+      "AI",
+      "人工智能"
+    ],
+    "category": "search",
+    "difficulty": "easy",
+    "answer": "参考要点：2026-09 OpenAI 发布 GPT-6 Astra（宣称进入 AGI 时代）；多模态大模型、智能体（Agent）、空间智能、AI 具身智能、AI 治理与安全等为年度主线。",
+    "check": "回复应提到 AI / 人工智能 相关进展"
+  },
+  {
+    "id": 13,
+    "task": "帮我查一下今天的日期和星期几",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "2026"
+    ],
+    "category": "code_execution",
+    "difficulty": "easy",
+    "answer": "运行当天日期，如 2026-09-04 星期五",
+    "check": "应输出运行当日日期（年份为2026）与星期"
+  },
+  {
+    "id": 14,
+    "task": "计算圆的面积，半径为7.5",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "176"
+    ],
+    "category": "calculation",
+    "difficulty": "easy",
+    "answer": "≈ 176.71",
+    "check": "π×7.5² = 56.25π ≈ 176.71（约176）"
+  },
+  {
+    "id": 15,
+    "task": "用Python统计字符串'hello world hello python hello ai'中每个单词出现的次数",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "hello",
+      "3"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium",
+    "answer": "hello:3, world:1, python:1, ai:1",
+    "check": "hello 出现 3 次"
+  },
+  {
+    "id": 16,
+    "task": "查询所有薪资高于20000的员工姓名和职位",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "王强",
+      "张伟",
+      "褚明",
+      "蒋欣",
+      "卫龙"
+    ],
+    "category": "database",
+    "difficulty": "medium",
+    "answer": "王强、张伟、褚明、蒋欣、卫龙",
+    "check": "应包含 王强/张伟/褚明/蒋欣/卫龙"
+  },
+  {
+    "id": 17,
+    "task": "计算组合数C(10,3)的值",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "120"
+    ],
+    "category": "calculation",
+    "difficulty": "medium",
+    "answer": "120",
+    "check": "10!/(3!7!) = 120"
+  },
+  {
+    "id": 18,
+    "task": "用Python写一个函数判断一个数是否为回文数，并测试12321和12345",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "True",
+      "False"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium",
+    "answer": "12321 → True, 12345 → False",
+    "check": "12321 为回文(True)，12345 不是(False)"
+  },
+  {
+    "id": 19,
+    "task": "查询财务部在哪个城市",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "深圳"
+    ],
+    "category": "database",
+    "difficulty": "easy",
+    "answer": "深圳",
+    "check": "财务部城市 = 深圳",
+    "expected_sql": "SELECT city FROM departments WHERE name = '财务部';"
+  },
+  {
+    "id": 20,
+    "task": "搜索Python 3.13有哪些新特性",
+    "expected_tools": [
+      "Search"
+    ],
+    "expected_keywords": [
+      "Python"
+    ],
+    "category": "search",
+    "difficulty": "easy",
+    "answer": "要点：实验性 JIT 编译器(PEP 744)、可选的自由线程(无 GIL, PEP 703)、全新交互式 REPL、typing.Self / typing.Never、PEP 695 原生泛型语法、collections.Counter 性能优化等。",
+    "check": "回复应提到 Python 及 3.13 相关新特性"
+  },
+  {
+    "id": 21,
+    "task": "用Python读取一个数字列表[3,7,2,9,1,5,8]，计算最大值、最小值和平均值",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "9",
+      "1",
+      "5"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium",
+    "answer": "最大值=9, 最小值=1, 平均值=5.0",
+    "check": "max=9, min=1, avg=5"
+  },
+  {
+    "id": 22,
+    "task": "查询预算最高的项目名称和预算金额",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "AI Agent",
+      "1500000"
+    ],
+    "category": "database",
+    "difficulty": "medium",
+    "answer": "AI Agent, 1500000",
+    "check": "预算最高项目为 AI Agent，金额 1500000",
+    "expected_sql": "SELECT name, budget FROM projects ORDER BY budget DESC LIMIT 1;"
+  },
+  {
+    "id": 23,
+    "task": "计算 sin(pi/6) + cos(pi/3) 的值",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "1"
+    ],
+    "category": "calculation",
+    "difficulty": "medium",
+    "answer": "1",
+    "check": "0.5 + 0.5 = 1"
+  },
+  {
+    "id": 24,
+    "task": "用Python实现一个简单的字典程序：创建一个包含5个学生姓名和成绩的字典，按成绩降序输出",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "排序"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium",
+    "answer": "无固定答案（数据自定义），关键是输出按成绩降序排列",
+    "check": "输出应为按成绩从高到低排序的学生字典"
+  },
+  {
+    "id": 25,
+    "task": "查询有多少个项目已经完成",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "1"
+    ],
+    "category": "database",
+    "difficulty": "easy",
+    "answer": "1",
+    "check": "已完成项目数 = 1",
+    "expected_sql": "SELECT COUNT(*) FROM projects WHERE status = '已完成';"
+  },
+  {
+    "id": 26,
+    "task": "搜索一下什么是RAG检索增强生成",
+    "expected_tools": [
+      "Search"
+    ],
+    "expected_keywords": [
+      "检索",
+      "生成"
+    ],
+    "category": "search",
+    "difficulty": "easy",
+    "answer": "RAG = Retrieval-Augmented Generation，检索增强生成：先从外部知识库检索相关文档，再作为上下文提供给大模型生成更准确的回答，解决知识过时/幻觉/私有数据问题。",
+    "check": "回复应包含 检索 与 生成 概念"
+  },
+  {
+    "id": 27,
+    "task": "计算 log2(1024) * log10(1000)",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "30"
+    ],
+    "category": "calculation",
+    "difficulty": "medium",
+    "answer": "30",
+    "check": "10 × 3 = 30"
+  },
+  {
+    "id": 28,
+    "task": "用Python生成一个5x5的随机矩阵，并计算其行列式",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "行列式"
+    ],
+    "category": "code_execution",
+    "difficulty": "hard",
+    "answer": "无固定答案（矩阵随机生成），关键是输出该矩阵对应的行列式数值",
+    "check": "应输出一个行列式数值；示例(seed=42)矩阵行列式为 -4812"
+  },
+  {
+    "id": 29,
+    "task": "查询所有员工的姓名、部门名称和薪资（需要联表查询）",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "张伟",
+      "技术部",
+      "25000"
+    ],
+    "category": "database",
+    "difficulty": "hard",
+    "answer": "示例：张伟 / 技术部 / 25000",
+    "check": "应包含 张伟-技术部-25000 等联表结果"
+  },
+  {
+    "id": 30,
+    "task": "搜索LangChain框架的最新版本和主要功能",
+    "expected_tools": [
+      "Search"
+    ],
+    "expected_keywords": [
+      "LangChain"
+    ],
+    "category": "search",
+    "difficulty": "easy",
+    "answer": "LangChain 1.0 于 2025-10 发布（langchain-core / LangGraph 1.0 编排运行时 / create_agent 标准入口）；核心能力：统一模型抽象、Prompt/Chain、工具调用、RAG、Agent 编排、可观测(LangSmith)。",
+    "check": "回复应提到 LangChain 及主要功能/版本"
+  }
+]

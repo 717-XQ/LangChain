@@ -1,0 +1,82 @@
+# ============================================================
+# AI Agent助手 - 配置文件
+# ============================================================
+# 说明：
+#   - API Key 一律通过环境变量注入（backend/.env 或系统环境变量）：
+#       DEEPSEEK_API_KEY / DASHSCOPE_API_KEY / OPENAI_API_KEY / SERPAPI_KEY / JWT_SECRET
+#   - 本文件不含任何密钥，可安全入库；模板见 config.yaml.example
+# ============================================================
+
+llm:
+  # 多Provider自动降级（技术栈2.1）：按 priority 顺序调用，失败自动降级到下一个
+  providers:
+    - name: "deepseek"                    # DEEPSEEK_API_KEY
+      model: "deepseek-chat"
+      base_url: "https://api.deepseek.com/v1"
+      api_key: ""                         # 留空，由环境变量注入
+      priority: 1
+    - name: "dashscope"                   # DASHSCOPE_API_KEY（阿里云百炼通义千问）
+      model: "qwen-plus"
+      base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+      api_key: ""
+      priority: 2
+    - name: "openai"                      # OPENAI_API_KEY
+      model: "gpt-4o-mini"
+      base_url: "https://api.openai.com/v1"
+      api_key: ""
+      priority: 3
+  temperature: 0.0                        # 温度：0最确定，Agent场景建议0
+  max_tokens: 2048                        # 最大生成token数
+  streaming: true                         # 流式输出
+  request_timeout: 60                     # 请求超时（秒）
+
+agent:
+  max_iterations: 4                   # 最大工具调用轮次（防止无限循环，4足够大多数任务）
+  early_stopping_method: "generate"   # 达到上限时强制生成答案
+  handle_parsing_errors: true         # 输出解析错误时自动重试
+  verbose: true                       # 打印完整思考过程
+  return_intermediate_steps: true     # 返回工具调用中间步骤
+
+memory:
+  short_term_window: 5                                    # 短期记忆：保留最近5轮对话
+  long_term_embedding_model: "BAAI/bge-small-zh-v1.5"    # 长期记忆Embedding模型
+  long_term_top_k: 3                                      # 长期记忆检索返回Top3
+  long_term_persist_dir: "./faiss_memory"                 # 长期记忆持久化目录
+  similarity_threshold: 0.9                               # 相似度>0.9不重复存储
+
+tools:
+  search:
+    provider: "duckduckgo"            # 搜索引擎：duckduckgo（免费无需Key）或 serpapi
+    serpapi_key: ""                   # SerpAPI Key（如使用serpapi请填写）
+    num_results: 5                    # 搜索返回Top5
+  python_executor:
+    timeout: 30                       # Python代码执行超时（秒）
+    max_output_length: 10000          # 最大输出字符数
+  sql_query:
+    database_uri: "sqlite:///data/example.db"  # 【数据库路径，可修改为自己的数据库（支持MySQL/PostgreSQL）】
+    read_only: true                   # 只读模式，禁止INSERT/UPDATE/DELETE/DROP
+    max_rows: 50                      # 查询最多返回50行
+  doc_qa:
+    docs_dir: "./docs"                            # 【文档目录，放入你自己的文档】
+    embedding_model: "BAAI/bge-small-zh-v1.5"
+    persist_dir: "./faiss_docs"
+    top_k: 3
+    chunk_size: 500
+    chunk_overlap: 50
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  websocket_timeout: 300
+
+database:
+  # 用户/认证数据存储（技术栈2.1：SQLAlchemy，开发SQLite / 生产MySQL/PG）
+  # 示例MySQL: "mysql+pymysql://root:password@127.0.0.1:3306/agent_kb?charset=utf8mb4"
+  url: "sqlite:///data/app.db"
+
+auth:
+  # JWT认证配置（技术栈2.1：python-jose + bcrypt）
+  jwt_secret: ""                        # 【生产必填】环境变量 JWT_SECRET 注入
+  jwt_algorithm: "HS256"
+  access_token_expire_minutes: 30       # 访问Token有效期（30分钟）
+  refresh_token_expire_days: 7          # 刷新Token有效期（7天）

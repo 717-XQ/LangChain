@@ -1,0 +1,258 @@
+{
+  "total_tasks": 30,
+  "successful_tasks": 26,
+  "failed_tasks": 4,
+  "success_rate": 0.8667,
+  "success_rate_percent": "86.67%",
+  "category_stats": {
+    "calculation": {
+      "total": 6,
+      "success": 6,
+      "failed": 0
+    },
+    "code_execution": {
+      "total": 9,
+      "success": 9,
+      "failed": 0
+    },
+    "database": {
+      "total": 11,
+      "success": 11,
+      "failed": 0
+    },
+    "search": {
+      "total": 4,
+      "success": 0,
+      "failed": 4
+    }
+  },
+  "difficulty_stats": {
+    "easy": {
+      "total": 11,
+      "success": 7,
+      "failed": 4
+    },
+    "medium": {
+      "total": 16,
+      "success": 16,
+      "failed": 0
+    },
+    "hard": {
+      "total": 3,
+      "success": 3,
+      "failed": 0
+    }
+  },
+  "results": [
+    {
+      "task_id": 1,
+      "category": "calculation",
+      "difficulty": "easy",
+      "success": true,
+      "reason": "数值匹配: 12288.0 ≈ 12288.0（误差<1%）"
+    },
+    {
+      "task_id": 2,
+      "category": "calculation",
+      "difficulty": "easy",
+      "success": true,
+      "reason": "数值匹配: 39.0 ≈ 39.0（误差<1%）"
+    },
+    {
+      "task_id": 3,
+      "category": "code_execution",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "关键词匹配: ['1060']"
+    },
+    {
+      "task_id": 4,
+      "category": "code_execution",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "关键词匹配: ['1', '1', '2', '3', '5', '8']"
+    },
+    {
+      "task_id": 5,
+      "category": "code_execution",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "关键词匹配: ['11', '12', '22', '25', '34', '64', '90']"
+    },
+    {
+      "task_id": 6,
+      "category": "database",
+      "difficulty": "easy",
+      "success": true,
+      "reason": "数据库结果匹配: ['employees', 'departments', 'projects']"
+    },
+    {
+      "task_id": 7,
+      "category": "database",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数据库结果匹配: ['5']"
+    },
+    {
+      "task_id": 8,
+      "category": "database",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数据库结果匹配: ['王强', '45000']"
+    },
+    {
+      "task_id": 9,
+      "category": "database",
+      "difficulty": "hard",
+      "success": true,
+      "reason": "数据库结果匹配: ['技术部', '产品部', '市场部']"
+    },
+    {
+      "task_id": 10,
+      "category": "database",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数据库结果匹配: ['张伟', '冯雪', '褚明', '刘洋']"
+    },
+    {
+      "task_id": 11,
+      "category": "database",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数据库结果匹配: ['智能客服', 'APP', 'Agent']"
+    },
+    {
+      "task_id": 12,
+      "category": "search",
+      "difficulty": "easy",
+      "success": false,
+      "reason": "搜索结果未包含2026年最新AI进展信息（信息过时）"
+    },
+    {
+      "task_id": 13,
+      "category": "code_execution",
+      "difficulty": "easy",
+      "success": true,
+      "reason": "非确定性任务，输出结构合理（长度23）"
+    },
+    {
+      "task_id": 14,
+      "category": "calculation",
+      "difficulty": "easy",
+      "success": true,
+      "reason": "数值匹配: 176.71 ≈ 176.71（误差<1%）"
+    },
+    {
+      "task_id": 15,
+      "category": "code_execution",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "关键词匹配: ['hello', '3']"
+    },
+    {
+      "task_id": 16,
+      "category": "database",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数据库结果匹配: ['王强', '张伟', '褚明', '蒋欣', '卫龙']"
+    },
+    {
+      "task_id": 17,
+      "category": "calculation",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数值匹配: 120.0 ≈ 120.0（误差<1%）"
+    },
+    {
+      "task_id": 18,
+      "category": "code_execution",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "关键词匹配: ['True', 'False']"
+    },
+    {
+      "task_id": 19,
+      "category": "database",
+      "difficulty": "easy",
+      "success": true,
+      "reason": "数据库结果匹配: ['深圳']"
+    },
+    {
+      "task_id": 20,
+      "category": "search",
+      "difficulty": "easy",
+      "success": false,
+      "reason": "Python 3.13新特性回答不完整，遗漏JIT编译器和无GIL"
+    },
+    {
+      "task_id": 21,
+      "category": "code_execution",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "关键词匹配: ['9', '1', '5']"
+    },
+    {
+      "task_id": 22,
+      "category": "database",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数据库结果匹配: ['AI Agent', '1500000']"
+    },
+    {
+      "task_id": 23,
+      "category": "calculation",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数值匹配: 1.0 ≈ 1.0（误差<1%）"
+    },
+    {
+      "task_id": 24,
+      "category": "code_execution",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "非确定性任务，输出结构合理（长度25）"
+    },
+    {
+      "task_id": 25,
+      "category": "database",
+      "difficulty": "easy",
+      "success": true,
+      "reason": "数据库结果匹配: ['1']"
+    },
+    {
+      "task_id": 26,
+      "category": "search",
+      "difficulty": "easy",
+      "success": false,
+      "reason": "RAG概念回答不准确，未清晰说明检索与生成的结合机制"
+    },
+    {
+      "task_id": 27,
+      "category": "calculation",
+      "difficulty": "medium",
+      "success": true,
+      "reason": "数值匹配: 30.0 ≈ 30.0（误差<1%）"
+    },
+    {
+      "task_id": 28,
+      "category": "code_execution",
+      "difficulty": "hard",
+      "success": true,
+      "reason": "非确定性任务，输出结构合理（长度30）"
+    },
+    {
+      "task_id": 29,
+      "category": "database",
+      "difficulty": "hard",
+      "success": true,
+      "reason": "数据库结果匹配: ['张伟', '技术部', '25000']"
+    },
+    {
+      "task_id": 30,
+      "category": "search",
+      "difficulty": "easy",
+      "success": false,
+      "reason": "LangChain版本信息过时，未提及1.0版本和LangGraph"
+    }
+  ]
+}

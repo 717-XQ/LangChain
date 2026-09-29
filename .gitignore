@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 环境变量（含密钥，绝对不能上传）
+.env
+.env.local
+
+# 前端依赖与构建产物
+node_modules/
+frontend-vue/node_modules/
+frontend-vue/dist/
+
+# 数据与生成物（不入库，init-db/db-init 生成）
+*.db
+data/
+backend/data/
+faiss_memory/
+faiss_docs/
+logs/
+eval_results/
+
+# IDE
+.idea/
+.vscode/
+
+# 操作系统
+.DS_Store
+Thumbs.db

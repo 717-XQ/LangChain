@@ -1,0 +1,406 @@
+[
+  {
+    "id": 1,
+    "task": "计算 256 * 48 等于多少",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "12288"
+    ],
+    "category": "calculation",
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "task": "sqrt(144) + 3**3 的结果是多少",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "39"
+    ],
+    "category": "calculation",
+    "difficulty": "easy"
+  },
+  {
+    "id": 3,
+    "task": "用Python计算1到100中所有质数的和",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "1060"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": 4,
+    "task": "用Python生成斐波那契数列前20项并打印",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "1",
+      "1",
+      "2",
+      "3",
+      "5",
+      "8"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "task": "用Python实现一个简单的冒泡排序，对列表[64,34,25,12,22,11,90]排序并输出结果",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "11",
+      "12",
+      "22",
+      "25",
+      "34",
+      "64",
+      "90"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": 6,
+    "task": "查询数据库中有哪些表",
+    "expected_tools": [
+      "GetDBSchema"
+    ],
+    "expected_keywords": [
+      "employees",
+      "departments",
+      "projects"
+    ],
+    "category": "database",
+    "difficulty": "easy"
+  },
+  {
+    "id": 7,
+    "task": "查询技术部有多少名员工",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "5"
+    ],
+    "category": "database",
+    "difficulty": "medium"
+  },
+  {
+    "id": 8,
+    "task": "查询薪资最高的员工姓名和薪资",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "王强",
+      "45000"
+    ],
+    "category": "database",
+    "difficulty": "medium"
+  },
+  {
+    "id": 9,
+    "task": "查询每个部门的平均薪资，按平均薪资降序排列",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "技术部",
+      "产品部",
+      "市场部"
+    ],
+    "category": "database",
+    "difficulty": "hard"
+  },
+  {
+    "id": 10,
+    "task": "查询所有在2022年入职的员工姓名和职位",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "张伟",
+      "冯雪",
+      "褚明",
+      "刘洋"
+    ],
+    "category": "database",
+    "difficulty": "medium"
+  },
+  {
+    "id": 11,
+    "task": "查询状态为'进行中'的项目名称和预算",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "智能客服",
+      "APP",
+      "Agent"
+    ],
+    "category": "database",
+    "difficulty": "medium"
+  },
+  {
+    "id": 12,
+    "task": "搜索一下2026年人工智能领域的最新进展",
+    "expected_tools": [
+      "Search"
+    ],
+    "expected_keywords": [
+      "AI",
+      "人工智能"
+    ],
+    "category": "search",
+    "difficulty": "easy"
+  },
+  {
+    "id": 13,
+    "task": "帮我查一下今天的日期和星期几",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "2026"
+    ],
+    "category": "code_execution",
+    "difficulty": "easy"
+  },
+  {
+    "id": 14,
+    "task": "计算圆的面积，半径为7.5",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "176"
+    ],
+    "category": "calculation",
+    "difficulty": "easy"
+  },
+  {
+    "id": 15,
+    "task": "用Python统计字符串'hello world hello python hello ai'中每个单词出现的次数",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "hello",
+      "3"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": 16,
+    "task": "查询所有薪资高于20000的员工姓名和职位",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "王强",
+      "张伟",
+      "褚明",
+      "蒋欣",
+      "卫龙"
+    ],
+    "category": "database",
+    "difficulty": "medium"
+  },
+  {
+    "id": 17,
+    "task": "计算组合数C(10,3)的值",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "120"
+    ],
+    "category": "calculation",
+    "difficulty": "medium"
+  },
+  {
+    "id": 18,
+    "task": "用Python写一个函数判断一个数是否为回文数，并测试12321和12345",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "True",
+      "False"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": 19,
+    "task": "查询财务部在哪个城市",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "深圳"
+    ],
+    "category": "database",
+    "difficulty": "easy"
+  },
+  {
+    "id": 20,
+    "task": "搜索Python 3.13有哪些新特性",
+    "expected_tools": [
+      "Search"
+    ],
+    "expected_keywords": [
+      "Python"
+    ],
+    "category": "search",
+    "difficulty": "easy"
+  },
+  {
+    "id": 21,
+    "task": "用Python读取一个数字列表[3,7,2,9,1,5,8]，计算最大值、最小值和平均值",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "9",
+      "1",
+      "5"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": 22,
+    "task": "查询预算最高的项目名称和预算金额",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "AI Agent",
+      "1500000"
+    ],
+    "category": "database",
+    "difficulty": "medium"
+  },
+  {
+    "id": 23,
+    "task": "计算 sin(pi/6) + cos(pi/3) 的值",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "1"
+    ],
+    "category": "calculation",
+    "difficulty": "medium"
+  },
+  {
+    "id": 24,
+    "task": "用Python实现一个简单的字典程序：创建一个包含5个学生姓名和成绩的字典，按成绩降序输出",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "排序"
+    ],
+    "category": "code_execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": 25,
+    "task": "查询有多少个项目已经完成",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "1"
+    ],
+    "category": "database",
+    "difficulty": "easy"
+  },
+  {
+    "id": 26,
+    "task": "搜索一下什么是RAG检索增强生成",
+    "expected_tools": [
+      "Search"
+    ],
+    "expected_keywords": [
+      "检索",
+      "生成"
+    ],
+    "category": "search",
+    "difficulty": "easy"
+  },
+  {
+    "id": 27,
+    "task": "计算 log2(1024) * log10(1000)",
+    "expected_tools": [
+      "Calculator"
+    ],
+    "expected_keywords": [
+      "30"
+    ],
+    "category": "calculation",
+    "difficulty": "medium"
+  },
+  {
+    "id": 28,
+    "task": "用Python生成一个5x5的随机矩阵，并计算其行列式",
+    "expected_tools": [
+      "PythonExecutor"
+    ],
+    "expected_keywords": [
+      "行列式"
+    ],
+    "category": "code_execution",
+    "difficulty": "hard"
+  },
+  {
+    "id": 29,
+    "task": "查询所有员工的姓名、部门名称和薪资（需要联表查询）",
+    "expected_tools": [
+      "GetDBSchema",
+      "SQLQuery"
+    ],
+    "expected_keywords": [
+      "张伟",
+      "技术部",
+      "25000"
+    ],
+    "category": "database",
+    "difficulty": "hard"
+  },
+  {
+    "id": 30,
+    "task": "搜索LangChain框架的最新版本和主要功能",
+    "expected_tools": [
+      "Search"
+    ],
+    "expected_keywords": [
+      "LangChain"
+    ],
+    "category": "search",
+    "difficulty": "easy"
+  }
+]
