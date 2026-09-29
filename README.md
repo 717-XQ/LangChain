@@ -89,7 +89,7 @@ python main.py chat --agent_type planner
 python main.py serve
 # REST API: http://localhost:8000/api/chat（需Bearer Token）
 # WebSocket: ws://localhost:8000/ws?token=<access_token>
-# 认证API: http://localhost:8000/auth/*（注册/登录/刷新）
+# 认证API: http://localhost:8000/api/auth/*（注册/登录/刷新）
 # 文档: http://localhost:8000/docs
 ```
 
@@ -114,21 +114,27 @@ python main.py eval
 
 ## 认证使用（技术栈2.1：JWT双Token）
 
+> 认证API挂载在 `/api/auth/*`（与业务API同 `/api` 前缀，前端代理直接可达）。
+
 ```bash
 # 注册（自动登录）
-curl -X POST http://localhost:8000/auth/register \
+curl -X POST http://localhost:8000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"username":"test_user","email":"test@example.com","password":"test123456"}'
 
 # 登录（返回 access_token / refresh_token）
-curl -X POST http://localhost:8000/auth/login \
+curl -X POST http://localhost:8000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"username":"test_user","password":"test123456"}'
 
 # 刷新Token
-curl -X POST http://localhost:8000/auth/refresh \
+curl -X POST http://localhost:8000/api/auth/refresh \
   -H "Content-Type: application/json" \
   -d '{"refresh_token":"<refresh_token>"}'
+
+# 当前用户
+curl http://localhost:8000/api/auth/me \
+  -H "Authorization: Bearer <access_token>"
 ```
 
 - 访问Token有效期30分钟，刷新Token 7天；前端Axios拦截器自动续期
@@ -155,7 +161,7 @@ LangChain/
 ├── backend/                    # 后端（对齐技术栈2.1，与 frontend-vue/ 平行区分）
 │   ├── server/                 # FastAPI服务（REST + WebSocket + JWT认证）
 │   │   ├── api.py              # FastAPI REST（业务API均需Bearer Token）
-│   │   ├── auth.py             # JWT认证（python-jose + bcrypt，/auth/*）
+│   │   ├── auth.py             # JWT认证（python-jose + bcrypt，/api/auth/*）
 │   │   ├── websocket_handler.py# WebSocket（Agent Execution Trace协议，Token鉴权）
 │   │   └── schemas.py          # 数据模型
 │   ├── agent/                  # Agent核心
@@ -207,7 +213,7 @@ LangChain/
 
 ```bash
 # 先登录获取Token
-TOKEN=$(curl -s -X POST http://localhost:8000/auth/login \
+TOKEN=$(curl -s -X POST http://localhost:8000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"username":"test_user","password":"test123456"}' | jq -r .access_token)
 
@@ -224,7 +230,7 @@ import websockets, json, urllib.request
 
 # 1. 登录获取Token
 req = urllib.request.Request(
-    "http://localhost:8000/auth/login",
+    "http://localhost:8000/api/auth/login",
     data=json.dumps({"username": "test_user", "password": "test123456"}).encode(),
     headers={"Content-Type": "application/json"})
 token = json.loads(urllib.request.urlopen(req).read())["access_token"]
@@ -338,7 +344,7 @@ A: 修改config.yaml中 `tools.sql_query.database_uri`，支持SQLite/MySQL/Post
 A: 先执行 `python main.py db-init` 初始化users表；确认后端已启动且前端请求代理到8000端口。
 
 **Q: WebSocket连接失败（4401）？**
-A: 连接URL需携带 `?token=<access_token>`；Token过期时前端会通过 `/auth/refresh` 自动续期后重连。
+A: 连接URL需携带 `?token=<access_token>`；Token过期时前端会通过 `/api/auth/refresh` 自动续期后重连。
 
 **Q: MCP工具如何被外部客户端调用？**
 A: 运行 `python mcp_server_real.py` 启动MCP Server，支持标准JSON-RPC 2.0协议的tools/list和tools/call，可被Claude Desktop、Cursor或其他LangChain Agent直接调用。

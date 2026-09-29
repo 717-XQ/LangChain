@@ -51,7 +51,8 @@ class APIServer:
         )
 
         # JWT认证路由（技术栈2.1：注册/登录/刷新/当前用户）
-        app.include_router(auth_router)
+        # 挂载到 /api 前缀下，最终路径 /api/auth/*（与前端 /api 代理一致）
+        app.include_router(auth_router, prefix="/api")
 
         # ---------- 健康检查（公开） ----------
         @app.get("/api/health", response_model=HealthResponse)
