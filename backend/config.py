@@ -13,11 +13,18 @@ import yaml
 from pathlib import Path
 from typing import Optional, List, Dict, Any, Type
 
+from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # HuggingFace国内镜像（Embedding模型下载用）
 os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
+
+# ---- 加载 .env（backend/.env 优先，兼容从项目根/任意目录运行；不覆盖已有环境变量）----
+_config_dir = Path(__file__).resolve().parent          # backend/
+load_dotenv(_config_dir / ".env")                      # backend/.env（主）
+load_dotenv(_config_dir.parent / ".env")               # 项目根 .env（兜底）
+load_dotenv()                                          # 当前工作目录 .env（兜底）
 
 
 # ============================================================
