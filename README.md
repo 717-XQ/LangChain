@@ -103,7 +103,7 @@ npm run dev
 ```
 
 前端技术栈：Vue3 + TypeScript + Vite + Element Plus + Pinia + Vue Router + Axios + markdown-it + highlight.js + ECharts
-功能：登录/注册、聊天界面、工具调用时间线（折叠）、Agent模式切换、会话管理、Human-in-the-loop审批弹窗、Execution Trace实时展示、工具调用统计图表（ECharts）、Token自动刷新
+功能：登录/注册、聊天界面、Agent模式切换、会话管理、Human-in-the-loop审批弹窗、Execution Trace实时展示、右侧可折叠"工具调用"面板（ECharts统计图 + 完整调用过程时间线，按钮开关不遮挡会话内容）、Token自动刷新
 
 ### 7. 运行评估
 
